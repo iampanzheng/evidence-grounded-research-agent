@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-26",
+  "input_file": "s93-release-audit.zip",
+  "input_zip_sha256": "208a82bc958de174fb2138384691656ce06e5a06198b7534bc80892e4e333318",
+  "scope": "CURATED_PUBLIC_REPOSITORY_DEPENDENCY_LOCKS",
+  "python_runtime": {
+    "finding_count": 0,
+    "source": "pip-audit runtime locked JSON",
+    "assessment": "NO_KNOWN_VULNERABILITIES_FOUND_AT_SCAN_TIME"
+  },
+  "npm_production": {
+    "finding_count": 0,
+    "source": "npm audit --omit=dev JSON",
+    "assessment": "NO_KNOWN_VULNERABILITIES_FOUND_AT_SCAN_TIME"
+  },
+  "npm_all": {
+    "affected_package_count": 3,
+    "severity_totals": {
+      "critical": 2,
+      "moderate": 1,
+      "total": 3
+    },
+    "affected": [
+      {
+        "name": "vitest",
+        "locked": "3.2.7",
+        "risk": "CRITICAL_CHAIN",
+        "next": "upgrade to 4.1.12 and retest"
+      },
+      {
+        "name": "@vitest/mocker",
+        "locked": "3.2.7",
+        "risk": "MODERATE_DIRECT",
+        "next": "re-resolve with Vitest >= 4.1.12"
+      },
+      {
+        "name": "tinypool",
+        "locked": "1.1.1",
+        "risk": "CRITICAL_DIRECT",
+        "next": "remove old graph via Vitest upgrade or upgrade to >=2.1.2 where compatible"
+      }
+    ]
+  },
+  "license": {
+    "owner_confirmed_third_party_license_notice_review": true,
+    "original_project_copyright": "Copyright 2026 Pan Zheng",
+    "no_relicensing_of_third_party_content": true
+  },
+  "decision": "HOLD_PUBLICATION_OPEN_NPM_DEV_VULNERABILITIES_AND_OWNER_PUSH_APPROVAL",
+  "completed_actions": [
+    "verified updated Python/runtime audit",
+    "verified npm production audit",
+    "reviewed npm development advisories",
+    "owner confirmed license notice review",
+    "updated owned source copyright"
+  ],
+  "not_done": [
+    "Vitest major upgrade",
+    "post-upgrade npm audit",
+    "post-upgrade full compatibility test",
+    "final owner GitHub push approval"
+  ]
+}

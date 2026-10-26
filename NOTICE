@@ -1,0 +1,13 @@
+P2 Evidence-grounded Research Agent
+Copyright 2026 Pan Zheng
+
+The original P2 application source and newly authored fictional Orion demo fixtures
+are offered under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party software dependencies retain their own licenses and notices. The
+included dependency lock files record resolved versions; they are not evidence
+of completed dependency license or vulnerability review.
+
+The original private Dubbo document corpus, derived private chunks, frozen
+Gold evaluation records and private model responses are not licensed or
+redistributed by this repository.

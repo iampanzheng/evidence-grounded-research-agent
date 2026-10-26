@@ -1,0 +1,42 @@
+{
+  "audit_disclaimer": "Time-bounded npm audit evidence from owner; not a warranty or substitute for future scans. No npm registry access in assistant environment.",
+  "date": "2026-10-26",
+  "milestone": "P2_S93_VITEST4_SECURITY_REMEDIATION",
+  "npm_all_audit_sha256": "8dfed5f0b63daa724336b0928361296adace30c7e458852aa01c5100c86bcec4",
+  "npm_all_summary": {
+    "critical": 0,
+    "high": 0,
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "total": 0
+  },
+  "npm_production_audit_sha256": "8dfed5f0b63daa724336b0928361296adace30c7e458852aa01c5100c86bcec4",
+  "npm_production_summary": {
+    "critical": 0,
+    "high": 0,
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "total": 0
+  },
+  "owner_scan_environment": {
+    "node": "v24.21.0",
+    "npm": "11.19.0"
+  },
+  "package_json_sha256": "0115daccd981374fe9ed4f2d93ff66b5a47d0f2ea2d5c3424a72b6c0a40e156d",
+  "package_lock_sha256": "ebc3e6ab51b7494e2c1e631dee5d58e301d45b5e05a999bc47fb6690d725a68d",
+  "privileged_actions_performed": [],
+  "python_runtime_audit": "OWNER_PRIOR_SCAN_ZERO_UNCHANGED_UV_LOCK",
+  "release_decision": "HOLD_PUBLICATION_PENDING_EXPLICIT_OWNER_APPROVAL_AND_CLEAN_NEW_GIT_REPOSITORY_REVIEW",
+  "scan_scope": "Owner-provided npm audit reports; npm complete dependency graph and production-only graph",
+  "schema_version": 1,
+  "source_archive_sha256": "27720a66958ed2bd6014ae88911141e4527c1dc405f9c6e9301c93b393488414",
+  "status": "OWNER_ONLINE_NPM_AUDIT_ZERO_AND_OFFLINE_ENGINEERING_VERIFIED",
+  "versions": {
+    "@vitest/mocker": "4.1.12",
+    "rollup": "4.65.0",
+    "vite": "7.3.7",
+    "vitest": "4.1.12"
+  }
+}

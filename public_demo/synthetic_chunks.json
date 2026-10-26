@@ -1,0 +1,67 @@
+{
+  "chunks": [
+    {
+      "chunk_id": "public_chunk_release",
+      "document_id": "public_doc_release",
+      "end_byte": 260,
+      "heading_path": [],
+      "language": "en",
+      "snapshot_id": "public-synthetic-orion-v1",
+      "source_id": "synthetic_orion",
+      "source_path": "public_demo/documents/release.md",
+      "source_sha256": "ccf6003c9b8a171dce9f20c786174daf89d58ec4c1ba5b8cd242f743f0032da3",
+      "source_url": "",
+      "start_byte": 0,
+      "text": "# Fictional Orion Release Checklist\n\nOrion is a fictional software service. Before a release, the team verifies passing integration tests, a documented rollback plan, and an approved change ticket. A release is blocked if any of these three checks is missing.\n",
+      "text_sha256": "ccf6003c9b8a171dce9f20c786174daf89d58ec4c1ba5b8cd242f743f0032da3"
+    },
+    {
+      "chunk_id": "public_chunk_incidents",
+      "document_id": "public_doc_incidents",
+      "end_byte": 282,
+      "heading_path": [],
+      "language": "en",
+      "snapshot_id": "public-synthetic-orion-v1",
+      "source_id": "synthetic_orion",
+      "source_path": "public_demo/documents/incidents.md",
+      "source_sha256": "a11b01790fd56d4ae97f57f0172ed3b51b17825587ad432e192929ba8014410b",
+      "source_url": "",
+      "start_byte": 0,
+      "text": "# Fictional Orion Incident Response\n\nFor an Orion incident, the on-call engineer opens a tracking ticket, records the incident severity, and assigns an incident lead. The incident lead documents the recovery steps after resolution. This is an invented process for software testing.\n",
+      "text_sha256": "a11b01790fd56d4ae97f57f0172ed3b51b17825587ad432e192929ba8014410b"
+    },
+    {
+      "chunk_id": "public_chunk_ownership",
+      "document_id": "public_doc_ownership",
+      "end_byte": 250,
+      "heading_path": [],
+      "language": "en",
+      "snapshot_id": "public-synthetic-orion-v1",
+      "source_id": "synthetic_orion",
+      "source_path": "public_demo/documents/ownership.md",
+      "source_sha256": "4a17d957993fef0e808c16f533b592e2f3f83c2942b7cb99166a713e7d0ff83e",
+      "source_url": "",
+      "start_byte": 0,
+      "text": "# Fictional Orion Service Ownership\n\nThe fictional Orion API team maintains the research service. The fictional Orion platform team maintains container health checks and deployment rollback automation. Every owner change requires a recorded handoff.\n",
+      "text_sha256": "4a17d957993fef0e808c16f533b592e2f3f83c2942b7cb99166a713e7d0ff83e"
+    },
+    {
+      "chunk_id": "public_chunk_testing",
+      "document_id": "public_doc_testing",
+      "end_byte": 268,
+      "heading_path": [],
+      "language": "en",
+      "snapshot_id": "public-synthetic-orion-v1",
+      "source_id": "synthetic_orion",
+      "source_path": "public_demo/documents/testing.md",
+      "source_sha256": "854274bea5f833e3955f0847081f43e5d39f1035465532aa156977dea646b8cb",
+      "source_url": "",
+      "start_byte": 0,
+      "text": "# Fictional Orion Quality Gates\n\nAn Orion smoke test checks HTTP readiness, authentication rejection, and citation rendering. Passing smoke tests do not prove factual correctness or production security. This data is deliberately invented for a software demonstration.\n",
+      "text_sha256": "854274bea5f833e3955f0847081f43e5d39f1035465532aa156977dea646b8cb"
+    }
+  ],
+  "dataset_id": "public-synthetic-orion-v1",
+  "schema_version": 1,
+  "synthetic": true
+}

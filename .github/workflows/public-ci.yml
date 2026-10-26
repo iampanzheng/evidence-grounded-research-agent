@@ -1,0 +1,31 @@
+name: Public Offline Fixture CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python-public:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.13'
+      - run: python tools/s93_release_gate.py --root . --enforce
+      - run: uv sync --locked --dev
+      - run: bash scripts/verify-public.sh
+      - run: uv run python tools/public_demo_smoke.py
+  react-public:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm run check
+        working-directory: web
