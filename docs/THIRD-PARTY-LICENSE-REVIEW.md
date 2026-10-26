@@ -12,18 +12,18 @@ Inventory scope:
 
 No bundled dependency distributions are being redistributed in the source archive. Dependencies are obtained by the end-user's package manager; this does **not** eliminate a publisher's responsibility to respect dependency licenses, especially when shipping containers or compiled artifacts later.
 
-**Open gates:** independent license/notice review for flagged distributions, third-party security/vulnerability scan, owner review of this clean public tree, and explicit authorization before any push. No release has been published.
+**Published-baseline update (2026-10-26):** The owner confirms review of third-party LICENSE/NOTICE, publication of the curated source baseline to `iampanzheng/evidence-grounded-research-agent`, and a successful initial public CI run. Owner-supplied `pip-audit` and npm full/production audit reports found 0 known advisories on the reviewed locks that day. This is **not** independent legal sign-off or a perpetual vulnerability guarantee. Each future documentation or code change requires its own reviewed commit/CI; the initial CI does not certify later changes. See `RELEASE-CHECKLIST.md`.
 
 ## Dependency remediation inventory refresh (2026-10-26)
 
 The attached machine-readable inventory now derives from the refreshed owner-supplied `uv.lock` and `web/package-lock.json`: Python runtime 45 version-matched wheel METADATA records, 109 Python lock entries (including the local project/optional packages), and 211 npm lock entries with license declarations. Versioned runtime entries include FastAPI 0.142.2, Starlette 1.10.0, certifi 2026.10.23, and opentelemetry-api 1.45.1; Vite/Vitest development pins are 7.3.7/3.2.7. The count of all lock entries must not be confused with the number of redistributed or installed production packages.
 
-This update **does not** assert that new dependencies have been freshly scanned against online vulnerability databases. `certifi` and `orjson` retain MPL-related declarations; `caniuse-lite` retains CC-BY-4.0. The final license/NOTICE review is still outstanding; refer to `docs/RELEASE-CHECKLIST.md`.
+This update **does not** assert that new dependencies have been freshly scanned against online vulnerability databases. `certifi` and `orjson` retain MPL-related declarations; `caniuse-lite` retains CC-BY-4.0. The owner subsequently confirmed LICENSE/NOTICE review; see the dated Owner review and Vitest 4 sections below, plus `docs/RELEASE-CHECKLIST.md`.
 
 
 ## Owner review (2026-10-26)
 
-Owner confirmed review of the third-party LICENSE/NOTICE material. This is a record of the owner’s review, **not** an automatic blanket relicensing of dependencies or source corpus and **not** a release approval. The latest npm development vulnerabilities still block public release; see `docs/STAGE9-S93-OWNER-SECURITY-COPYRIGHT.md`.
+Owner confirmed review of the third-party LICENSE/NOTICE material. This is a record of the owner’s review, **not** an automatic blanket relicensing of dependencies or source corpus and **not** a release approval. The npm development findings recorded earlier were remediated in the later Vitest 4.1.12 update; that older gate was historical, not the current published-baseline state.
 
 ## Vitest 4.1.12 refreshed inventory (2026-10-26)
 

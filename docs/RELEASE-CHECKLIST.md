@@ -1,45 +1,36 @@
-# Final public-source release checklist (approval recorded; no push performed)
+# Public release record and future-update checklist
 
-**Current (2026-10-26):** The owner has approved **Apache-2.0**, the exclusion of real Dubbo data and private Git history, third-party LICENSE/NOTICE review, and the intended destination **`iampanzheng/evidence-grounded-research-agent`**. The owner requested a clearer Portfolio presentation **before** the first push. This refreshed source candidate must have its final staged file list and new README reviewed; specifying the repository is not itself a completed GitHub publish. Latest provided owner scans (2026-10-26) reported **0 findings** for the unchanged Python runtime lock and refreshed full + production npm lock. Later vulnerability advisories are possible.
+## Current state — 2026-10-26
 
-S9.3 ships a curated **source candidate**, not a GitHub release. The following steps apply to a clean, separately initialized repository, **never push the private project's Git history**.
+**Public baseline published.** The owner reported that the new public repository was created from the independently curated source tree. The initial `main` commit is `cc67d0f` (abbreviated), with a successful first GitHub Actions run. These are **owner-provided CLI and screenshot observations**; the remote was not independently fetched during this closeout.
 
-1. Extract the public ZIP into an empty directory. Verify its checksums and no unexpected paths before installing dependencies:
+| Item | Evidence / scope |
+| --- | --- |
+| Public repository | [`iampanzheng/evidence-grounded-research-agent`](https://github.com/iampanzheng/evidence-grounded-research-agent) |
+| First published commit | [`cc67d0f`](https://github.com/iampanzheng/evidence-grounded-research-agent/commit/cc67d0f) (owner-supplied prefix) |
+| First workflow | [`Public Offline Fixture CI`, run `40291128850`](https://github.com/iampanzheng/evidence-grounded-research-agent/actions/runs/40291128850), `success` (owner-supplied) |
+| Project license / copyright | Apache-2.0; Copyright 2026 Pan Zheng |
+| Data boundary | Original fictional Orion documents only; original Dubbo corpus, Gold, private responses, credentials, and historical internal Git commits are excluded |
+| Third-party review | Owner confirmed LICENSE/NOTICE review on 2026-10-26; not a blanket legal certification |
+| Known-dependency advisories | Owner's 2026-10-26 `pip-audit` runtime and npm full/production scans each reported 0 findings for the reviewed locks; point-in-time only |
+| Host status | Local synthetic demo / provider-free CI; **not** a publicly hosted service or a real-Groq CI run |
 
-   ```bash
-   python tools/s93_release_gate.py --root . --enforce
-   ```
+**Important distinction:** `PUBLIC-CURATION-MANIFEST.json` identifies a `CURATED_PUBLIC_SOURCE_SNAPSHOT`; it does not attest that every subsequent change is already pushed. The gate reports `CONTENT_VERIFIED_ONLY` for a tree matching its inventory. This is strictly a content-integrity result—not a CI success claim, remote verification, or permission to publish future updates.
 
-   Expected: `CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING`. This is an integrity result, **not** permission to publish.
+## For the first post-publication documentation closeout commit
 
-2. Run `uv sync --locked --dev`, `bash scripts/verify-public.sh`, `uv run python tools/public_demo_smoke.py`, and `cd web && npm ci && npm run check`.
-3. Compare `docs/THIRD-PARTY-LICENSE-INVENTORY.json` against current upstream dependency notices and licenses, especially MPL-2.0 and `caniuse-lite` CC-BY-4.0; confirm license and attribution treatment of redistributed artifacts.
-4. Run a fresh vulnerability scan (for example `uv pip audit` where supported, `pip-audit` / OSV and `npm audit`), and document unresolved advisories and dates. **This offline artifact does not contain a current vulnerability scan.**
-5. Inspect LICENSE / NOTICE and ensure synthetic Orion fixture is original. Review README claims and demo reproducibility.
-   Verify the three genuine UI screenshots under `docs/assets/` are included in the generated manifest, display only synthetic Orion responses and a masked local API key, and are linked from README/DEMO-GUIDE. No manual image injection after curation.
-6. Initialize a **new** Git repo in this curated directory (do not add private Git remotes or import private commits); run `git status`, `git ls-files`, and inspect `git log --all` after the first commit.
-7. Confirm the already-approved destination and scope still match the **final refreshed source tree**, have the owner review the clean staged commit, and obtain go-ahead for the exact refreshed release before pushing. No step in this package invokes `git push` or creates a remote repository.
+1. Use the new curated public update ZIP (not the internal engineering repository). Never import the private `.git` directory.
+2. Run `python tools/s93_release_gate.py --root . --enforce` and require zero issues; ensure the manifest was generated by the internal curator, **never hand-edit SHA-256 values**.
+3. Run `uv sync --locked --dev`, `bash scripts/verify-public.sh`, `uv run python tools/public_demo_smoke.py`, then `(cd web && npm ci && npm run check)`.
+4. Confirm the diff only adjusts published-status documentation/metadata and the tests guarding them; `LICENSE`, `NOTICE`, the Orion fixture, and the locked dependencies must be unchanged.
+5. In the **existing public checkout**, ensure the local baseline equals `cc67d0f` before applying the documentation update. Copy only the verified changed files and newly generated manifest, then stage the exact changed files rather than deleting/replacing the entire checkout; check `git diff --cached --stat` and `git diff --cached --check`.
+6. Commit to `main` after owner review; CI for the **new** commit must pass. The screenshot of workflow #1 proves the initial release, not any later update. Any later commit must have its own workflow outcome checked.
 
-Never commit `.env`, API credentials, local artifacts, `node_modules`, `.venv`, private corpus/Gold, raw responses, test caches or Docker build outputs.
+## For later updates and releases
 
-## After S9.3 security-remediation lock update
+- Keep the public allowlist, Git staging review, and integrity checks in place. No private Dubbo, frozen Gold, model transcripts, `.env`, or private internal Git history.
+- Repeat online dependency scans when locks change or prior evidence becomes stale. Do not equate historical zero findings with future immunity.
+- Retain the original per-file rights boundary. Source-only public distribution is **not** approval to redistribute third-party binary dependencies or models.
+- For any public-facing deployment, independently design and review hosting authentication, secrets, shared rate limiting, tracing, vulnerability scanning, legal notices, and incident response; local tests are not production certification.
 
-Before requesting final publish authorization, run the following **online** commands in a clean checkout of the updated public ZIP (results are local audit artifacts, not Git-committed reports):
-
-```bash
-mkdir -p artifacts/local/release-security
-uv export --locked --no-dev --no-hashes --no-emit-project -o artifacts/local/release-security/python-runtime.txt
-uvx --from pip-audit pip-audit -r artifacts/local/release-security/python-runtime.txt --no-deps --disable-pip -f json -o artifacts/local/release-security/python-audit.json
-(cd web && npm audit --json > ../artifacts/local/release-security/npm-all.json)
-(cd web && npm audit --omit=dev --json > ../artifacts/local/release-security/npm-production.json)
-```
-
-Nonzero exit codes due to reported advisories are expected; preserve the JSONs. **Do not run automatic `npm audit fix` or rewrite lock files** without a new compatibility run. Obtain owner final approval after reviewing these updated scan results and third-party license obligations.
-
-## Owner scan 2026-10-26
-
-Owner confirmed third-party LICENSE/NOTICE review and specified `Copyright 2026 Pan Zheng`. Latest submitted scans report 0 Python runtime and 0 npm production findings, but **3 npm development dependency findings** (Vitest, `@vitest/mocker`, tinypool). Treat as `HOLD_PUBLICATION`; upgrade and re-run both npm audits and complete tests before reconsidering clearance. Never edit `PUBLIC-CURATION-MANIFEST.json` by hand.
-
-## Latest Vitest 4 scan decision (2026-10-26)
-
-The earlier three npm development findings have been remediated by the owner-provided pinned Vitest 4.1.12 lock and confirmed with owner online full/production npm audit (both 0 reported vulnerabilities). The Python runtime lock did not change from its last 0-finding scan. See `docs/STAGE9-S93-VITEST4-CLOSEOUT.md`. **Do not use historical 3.2.7 audit results as the current state.** Original private Git history is not part of the clean candidate; explicit owner push authorization for a named new repository, last review of staged commit, and future rescan if release is delayed are still mandatory.
+Earlier Stage 9 candidate-only gates and historical `HOLD_PUBLICATION` reports remain accurate **for their original date**, but do not describe the published baseline as of this record.

@@ -125,7 +125,7 @@ def audit(root: Path) -> dict[str, Any]:
         issues.append("DEPENDENCY_INVENTORY_INVALID")
     return {
         "schema_version": 1,
-        "status": "BLOCK_RELEASE" if issues else "CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING",
+        "status": "BLOCK_RELEASE" if issues else "CONTENT_VERIFIED_ONLY",
         "issues": issues,
         "file_count": len(actual) + 1,
         "manifest_sha256": sha(manifest_path.read_bytes()),
@@ -151,7 +151,7 @@ def main() -> None:
     print(
         json.dumps({k: result[k] for k in ("status", "file_count", "issues")}, ensure_ascii=False)
     )
-    if args.enforce and result["status"] != "CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING":
+    if args.enforce and result["status"] != "CONTENT_VERIFIED_ONLY":
         sys.exit(2)
 
 

@@ -36,7 +36,7 @@ def _fixture(root: Path) -> None:
 def test_content_verified_but_approval_still_pending(tmp_path: Path) -> None:
     _fixture(tmp_path)
     result = audit(tmp_path)
-    assert result["status"] == "CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING"
+    assert result["status"] == "CONTENT_VERIFIED_ONLY"
     assert "explicit_owner_push_approval_required" in result["limits"]
 
 
@@ -83,7 +83,7 @@ def test_allows_clean_git_checkout_metadata_and_local_build_cache(tmp_path: Path
     subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
     (tmp_path / ".venv").mkdir()
     (tmp_path / ".venv" / "cache.txt").write_text("local-only")
-    assert audit(tmp_path)["status"] == "CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING"
+    assert audit(tmp_path)["status"] == "CONTENT_VERIFIED_ONLY"
 
 
 def test_copyright_exact_and_release_hold_in_project_tree() -> None:
@@ -129,6 +129,6 @@ def test_detects_tampered_screenshot_even_if_declared(tmp_path: Path) -> None:
     payload = json.loads(manifest.read_text())
     payload["sha256"]["docs/assets/demo-cited-answer.png"] = hashlib.sha256(original).hexdigest()
     manifest.write_text(json.dumps(payload))
-    assert audit(tmp_path)["status"] == "CONTENT_VERIFIED_OWNER_CLEARANCE_PENDING"
+    assert audit(tmp_path)["status"] == "CONTENT_VERIFIED_ONLY"
     screenshot.write_bytes(original + b"tampered")
     assert "FILE_HASH_MISMATCH:docs/assets/demo-cited-answer.png" in audit(tmp_path)["issues"]

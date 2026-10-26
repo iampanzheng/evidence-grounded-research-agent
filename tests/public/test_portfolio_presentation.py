@@ -56,3 +56,28 @@ def test_real_demo_images_are_allowlisted_pngs_and_documented() -> None:
     assert "actual local demo screenshots" in readme.lower()
     assert "Claim support: NOT_VERIFIED" in readme
     assert "deterministic fake LLM" in readme
+
+
+def test_post_publication_record_separates_baseline_from_unpushed_update() -> None:
+    import json
+
+    manifest_path = ROOT / "PUBLIC-CURATION-MANIFEST.json"
+    # The internal engineering source does not carry the generated public manifest.
+    if not manifest_path.is_file():
+        curator = (ROOT / "tools/s92_curate_public.py").read_text(encoding="utf-8")
+        assert '"release_type": "CURATED_PUBLIC_SOURCE_SNAPSHOT"' in curator
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["release_type"] == "CURATED_PUBLIC_SOURCE_SNAPSHOT"
+    baseline = manifest["published_baseline"]
+    assert baseline["repository"] == "iampanzheng/evidence-grounded-research-agent"
+    assert baseline["commit_prefix"] == "cc67d0f"
+    assert baseline["ci_run_id"] == 40291128850
+    assert baseline["ci_conclusion"] == "success"
+    assert baseline["live_repository_independently_verified"] is False
+    assert manifest["third_party_original_corpus_included"] is False
+    assert manifest["original_private_git_history_included"] is False
+    note = (ROOT / "docs/RELEASE-CHECKLIST.md").read_text(encoding="utf-8")
+    assert "public baseline published" in note.lower()
+    assert "future updates" in note.lower()
+    assert "GitHub Actions" in note
